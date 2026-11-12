@@ -1,0 +1,9 @@
+@model MenuItemPartViewModel
+
+<p class="menu-item__price@(Model.IsAvailable ? string.Empty : " menu-item__price--sold-out")">
+    <span>@Model.Price.ToString("N2")</span>
+    @if (!Model.IsAvailable)
+    {
+        <span class="menu-item__badge">@T["Sold out"]</span>
+    }
+</p>

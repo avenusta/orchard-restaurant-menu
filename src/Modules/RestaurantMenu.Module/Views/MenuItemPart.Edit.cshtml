@@ -1,0 +1,19 @@
+@model MenuItemPartViewModel
+
+<div class="mb-3">
+    <label asp-for="Price" class="form-label">@T["Price"]</label>
+    <input asp-for="Price" class="form-control" type="number" step="0.01" min="0.01" />
+    <span asp-validation-for="Price" class="text-danger"></span>
+</div>
+
+<div class="mb-3 form-check">
+    <input asp-for="IsAvailable" class="form-check-input" type="checkbox" />
+    <label asp-for="IsAvailable" class="form-check-label">@T["Available"]</label>
+    <span class="hint">@T["Unavailable items are still listed, marked as sold out."]</span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="SortOrder" class="form-label">@T["Sort order"]</label>
+    <input asp-for="SortOrder" class="form-control" type="number" />
+    <span class="hint">@T["Lower numbers are listed first within a category."]</span>
+</div>

@@ -17,6 +17,7 @@
         "OrchardCore.DynamicCache",
         "OrchardCore.Features",
         "OrchardCore.HomeRoute",
+        "OrchardCore.Localization",
         "OrchardCore.Navigation",
         "OrchardCore.Recipes",
         "OrchardCore.Resources",
@@ -45,6 +46,13 @@
       "name": "themes",
       "admin": "TheAdmin",
       "site": "RestaurantMenu.Theme"
+    },
+    {
+      "name": "settings",
+      "LocalizationSettings": {
+        "DefaultCulture": "en-US",
+        "SupportedCultures": [ "en-US" ]
+      }
     },
     {
       "name": "Roles",

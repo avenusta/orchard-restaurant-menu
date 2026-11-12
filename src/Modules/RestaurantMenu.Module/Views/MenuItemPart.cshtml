@@ -1,0 +1,9 @@
+@model MenuItemPartViewModel
+
+<p>
+    @T["Price: {0}", Model.Price.ToString("N2")]
+    @if (!Model.IsAvailable)
+    {
+        <strong>@T["Sold out"]</strong>
+    }
+</p>

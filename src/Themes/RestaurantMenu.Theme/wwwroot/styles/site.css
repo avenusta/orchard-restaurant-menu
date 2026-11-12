@@ -38,3 +38,26 @@ body {
     border-top: 1px solid var(--color-accent);
     font-size: 0.875rem;
 }
+
+.menu-item__title {
+    margin-bottom: 0.25rem;
+}
+
+.menu-item__price {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.menu-item__price--sold-out span:first-child {
+    color: #8a8178;
+    text-decoration: line-through;
+}
+
+.menu-item__badge {
+    margin-left: 0.5rem;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.875rem;
+    color: #fff;
+    background: var(--color-accent);
+    border-radius: 999px;
+}
