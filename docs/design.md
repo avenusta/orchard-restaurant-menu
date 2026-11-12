@@ -1,0 +1,129 @@
+# Restaurant Menu: design
+
+Orchard Core 3.0.1 (.NET 10) site for a single restaurant, built for the Óbuda University K-MOOC Orchard Core course. Requirements and instructor feedback are in `raw/02-requirements-and-milestones.md` and `raw/04-my-topic.md`.
+
+## Architecture
+
+- One Orchard app, server-rendered by a custom Razor theme. No React or SPA.
+- One restaurant now. More restaurants are added later as **tenants** set up from the same recipe, with no data-model changes.
+- Visitors browse only: no reservations or ordering.
+
+```
+src/RestaurantMenu.Web                 thin host (occms template), no features
+src/Modules/RestaurantMenu.Module      all functionality, one module, one feature
+src/Themes/RestaurantMenu.Theme        all visuals, Razor, built from scratch
+test/RestaurantMenu.Module.Tests       xUnit, pure logic only
+```
+
+Principles:
+- Composition over inheritance. Parts inherit from `ContentPart` only because Orchard requires it; there are no custom base classes. Types get their behaviour from the parts they combine.
+- Services are written against interfaces.
+- Every content type, part, field and taxonomy is defined in **migrations**, never only through the admin UI.
+
+## Content model
+
+### MenuItemPart (shared by Food and Drink)
+
+| Member | Type | Indexed |
+|---|---|---|
+| Price | `decimal` | ✔ |
+| IsAvailable | `bool` | ✔ |
+| DietaryTags | `[Flags] enum DietaryTags { None, Vegetarian, Vegan, GlutenFree }` | ✔ |
+| SortOrder | `int` | ✔ |
+| Description | HtmlField | |
+| Photo | MediaField | |
+| Category | TaxonomyField → *Menu Categories* | |
+| Allergens | TaxonomyField → *Allergens* | |
+
+### FoodPart
+
+| Member | Type |
+|---|---|
+| Spiciness | `enum Spiciness { None, Mild, Medium, Hot }` |
+| PortionGrams | `int?` |
+
+### DrinkPart
+
+| Member | Type |
+|---|---|
+| VolumeMl | `int` |
+| IsAlcoholic | `bool` |
+| AbvPercent | `decimal?`, required when IsAlcoholic |
+
+### Content types
+
+| Type | Parts |
+|---|---|
+| Food | TitlePart, AutoroutePart (`/menu/{slug}`), MenuItemPart, FoodPart |
+| Drink | TitlePart, AutoroutePart (`/menu/{slug}`), MenuItemPart, DrinkPart |
+| Page (landing) | TitlePart, FlowPart, AutoroutePart. Created by the recipe and set as the homepage. |
+
+### Taxonomies (created in migrations)
+
+- **Menu Categories:** Starters, Mains, Desserts, Hot drinks, … Terms are seeded by the recipe.
+- **Allergens:** the 14 EU allergens, seeded in the migration.
+
+### Index
+
+`MenuItemPartIndex`: ContentItemId, ContentType, Price, IsAvailable, DietaryTags, SortOrder. Filters "free of allergen X" by joining Orchard's taxonomy index.
+
+## Restaurant info
+
+```csharp
+public interface IRestaurantContext
+{
+    Task<RestaurantInfo> GetCurrentAsync();
+}
+```
+
+- v1 implementation: `SiteSettingsRestaurantContext`, reading `RestaurantSettings` from site settings (Name, Address, OpeningHours, Currency).
+- Templates and services only use `IRestaurantContext`, so the storage can later move to a Restaurant content type without changing callers.
+- Prices are formatted using the currency from `IRestaurantContext` and the current culture.
+
+## Module components
+
+| Component | Responsibility |
+|---|---|
+| Migrations | Create parts, fields, types, both taxonomies, the index table, and Autoroute patterns |
+| `MenuItemPartDisplayDriver`, `FoodPartDisplayDriver`, `DrinkPartDisplayDriver` | Display and edit using ViewModels; validate in `UpdateAsync` |
+| `MenuItemPartHandler` | Validates the price (> 0, max 2 decimals); normalises DietaryTags (Vegan implies Vegetarian) |
+| `MenuItemPartIndexProvider` | Maps content items that have a MenuItemPart into `MenuItemPartIndex` |
+| `IMenuQueryService` | Turns `MenuFilter` (diet, maxPrice, free-of allergens, availableOnly) into index and taxonomy queries; groups results by category |
+| `MenuController` | `[Route("menu")]`, the public menu grouped by category, with filters in the query string |
+| `RestaurantSettings` display driver | Settings section "Restaurant" |
+| `Permissions` | `ManageMenu`, granted to Administrator and Editor by default |
+| `AdminMenu : INavigationProvider` | "Restaurant" menu → Settings, Menu overview |
+| `Admin/MenuOverviewController` | Lists all items by category with price and availability, plus an availability toggle (POST). Authorizes against `ManageMenu`. |
+| Recipe `restaurant-menu.recipe.json` | Setup recipe: enables features, sets the theme, configures the Lucene index and search, adds sample categories, foods and drinks, and the landing page |
+
+All user-facing strings use `S[]`/`H[]`. The site is English only for now.
+
+## Public URLs
+
+| URL | Source |
+|---|---|
+| `/` | Landing page (FlowPart) |
+| `/menu` | `MenuController.Index` |
+| `/menu?diet=vegan&maxPrice=3000&free=nuts&available=true` | Same page, filtered |
+| `/menu/{slug}` | Autoroute → Food/Drink detail |
+| `/categories/{term}` | Taxonomy term pages |
+| `/search?q=` | Lucene search |
+| `/admin/restaurant/menu` | Admin menu overview |
+
+Unavailable items are listed but styled greyed out with a "Sold out" label. The `available=true` filter hides them.
+
+## Theme
+
+- `Layout.cshtml` written from scratch (replacing the template's `Layout.liquid`), with own CSS and JS as static resources.
+- Shape templates: `Food.cshtml`, `Food.Summary.cshtml`, `Drink.cshtml`, `Drink.Summary.cshtml`, and part templates.
+- `placement.json` to position and hide part and field shapes.
+- Ad-hoc shapes for the filter bar and price display.
+- Opening hours and address in the footer, via `IRestaurantContext`.
+
+## Tests
+
+`RestaurantMenu.Module.Tests` (xUnit) covers pure logic only: price validation, DietaryTags normalisation, `MenuFilter` parsing and mapping, and opening-hours formatting. It runs as part of `just check`.
+
+## Out of scope (possible additions later)
+
+React, reservations, ordering, specials widget, open-now layout filter, background tasks, caching, workflows, a second language.
