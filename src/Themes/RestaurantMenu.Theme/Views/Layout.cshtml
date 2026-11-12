@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="@Orchard.CultureName()" dir="@Orchard.CultureDir()">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@RenderTitleSegments(Site.SiteName, "before")</title>
+    <style asp-src="~/RestaurantMenu.Theme/styles/site.css"></style>
+    <resources type="Meta" />
+    <resources type="HeadLink" />
+    <resources type="Stylesheet" />
+    <resources type="HeadScript" />
+</head>
+<body>
+    <header class="site-header">
+        <a class="site-header__name" href="~/">@Site.SiteName</a>
+        @await RenderSectionAsync("Header", required: false)
+    </header>
+
+    <main class="site-main">
+        @await RenderSectionAsync("Messages", required: false)
+        @await RenderBodyAsync()
+    </main>
+
+    <footer class="site-footer">
+        @await RenderSectionAsync("Footer", required: false)
+    </footer>
+
+    <resources type="FootScript" />
+</body>
+</html>

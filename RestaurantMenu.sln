@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Themes", "Themes", "{E0A8BC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantMenu.Theme", "src\Themes\RestaurantMenu.Theme\RestaurantMenu.Theme.csproj", "{503F6E5B-CFCD-4DB7-AC34-38A0134B7343}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0C88DD14-F956-CE84-757C-A364CCF449FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantMenu.Module.Tests", "test\RestaurantMenu.Module.Tests\RestaurantMenu.Module.Tests.csproj", "{052897EA-8A6E-434E-9AAE-61D652EBC934}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,18 @@ Global
 		{503F6E5B-CFCD-4DB7-AC34-38A0134B7343}.Release|x64.Build.0 = Release|Any CPU
 		{503F6E5B-CFCD-4DB7-AC34-38A0134B7343}.Release|x86.ActiveCfg = Release|Any CPU
 		{503F6E5B-CFCD-4DB7-AC34-38A0134B7343}.Release|x86.Build.0 = Release|Any CPU
+		{052897EA-8A6E-434E-9AAE-61D652EBC934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{052897EA-8A6E-434E-9AAE-61D652EBC934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{052897EA-8A6E-434E-9AAE-61D652EBC934}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{052897EA-8A6E-434E-9AAE-61D652EBC934}.Debug|x64.Build.0 = Debug|Any CPU
+		{052897EA-8A6E-434E-9AAE-61D652EBC934}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{052897EA-8A6E-434E-9AAE-61D652EBC934}.Debug|x86.Build.0 = Debug|Any CPU
+		{052897EA-8A6E-434E-9AAE-61D652EBC934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{052897EA-8A6E-434E-9AAE-61D652EBC934}.Release|Any CPU.Build.0 = Release|Any CPU
+		{052897EA-8A6E-434E-9AAE-61D652EBC934}.Release|x64.ActiveCfg = Release|Any CPU
+		{052897EA-8A6E-434E-9AAE-61D652EBC934}.Release|x64.Build.0 = Release|Any CPU
+		{052897EA-8A6E-434E-9AAE-61D652EBC934}.Release|x86.ActiveCfg = Release|Any CPU
+		{052897EA-8A6E-434E-9AAE-61D652EBC934}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,5 +87,6 @@ Global
 		{F9CEC658-8069-40CF-A824-1B60DB7BCE7F} = {EC447DCF-ABFA-6E24-52A5-D7FD48A5C558}
 		{E0A8BCBC-00B4-78C5-78AF-D912941E3E1D} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{503F6E5B-CFCD-4DB7-AC34-38A0134B7343} = {E0A8BCBC-00B4-78C5-78AF-D912941E3E1D}
+		{052897EA-8A6E-434E-9AAE-61D652EBC934} = {0C88DD14-F956-CE84-757C-A364CCF449FC}
 	EndGlobalSection
 EndGlobal

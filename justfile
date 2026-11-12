@@ -19,6 +19,7 @@ fmt:
 check:
     dotnet format {{sln}} --verify-no-changes
     dotnet build {{sln}} --no-restore -p:TreatWarningsAsErrors=true -p:WarningsNotAsErrors=NU1902%3BNU1903
+    dotnet test {{sln}} --no-build
 
 reset:
     rm -rf {{web}}/App_Data

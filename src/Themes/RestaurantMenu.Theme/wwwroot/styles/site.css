@@ -1,0 +1,40 @@
+:root {
+    --color-text: #2b2118;
+    --color-background: #fbf7f1;
+    --color-accent: #9c3d1c;
+    --font-body: Georgia, "Times New Roman", serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-background);
+}
+
+.site-header,
+.site-main,
+.site-footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.site-header {
+    border-bottom: 2px solid var(--color-accent);
+}
+
+.site-header__name {
+    font-size: 1.75rem;
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.site-footer {
+    border-top: 1px solid var(--color-accent);
+    font-size: 0.875rem;
+}

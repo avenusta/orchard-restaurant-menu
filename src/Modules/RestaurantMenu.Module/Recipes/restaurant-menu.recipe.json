@@ -1,0 +1,60 @@
+{
+  "name": "RestaurantMenu",
+  "displayName": "Restaurant Menu",
+  "description": "Sets up the restaurant menu site with its module and theme.",
+  "author": "",
+  "website": "",
+  "version": "1.0.0",
+  "issetuprecipe": true,
+  "categories": [ "default" ],
+  "tags": [ "restaurant" ],
+  "steps": [
+    {
+      "name": "feature",
+      "enable": [
+        "OrchardCore.Admin",
+        "OrchardCore.Diagnostics",
+        "OrchardCore.DynamicCache",
+        "OrchardCore.Features",
+        "OrchardCore.HomeRoute",
+        "OrchardCore.Navigation",
+        "OrchardCore.Recipes",
+        "OrchardCore.Resources",
+        "OrchardCore.Roles",
+        "OrchardCore.Security",
+        "OrchardCore.Settings",
+        "OrchardCore.Themes",
+        "OrchardCore.Users",
+
+        "OrchardCore.Autoroute",
+        "OrchardCore.ContentFields",
+        "OrchardCore.Contents",
+        "OrchardCore.ContentTypes",
+        "OrchardCore.Flows",
+        "OrchardCore.Html",
+        "OrchardCore.Media",
+        "OrchardCore.Taxonomies",
+        "OrchardCore.Title",
+
+        "RestaurantMenu.Module",
+        "RestaurantMenu.Theme",
+        "TheAdmin"
+      ]
+    },
+    {
+      "name": "themes",
+      "admin": "TheAdmin",
+      "site": "RestaurantMenu.Theme"
+    },
+    {
+      "name": "Roles",
+      "Roles": [
+        {
+          "Name": "Editor",
+          "Description": "Grants users the ability to edit existing content.",
+          "Permissions": []
+        }
+      ]
+    }
+  ]
+}
