@@ -1,0 +1,7 @@
+@using RestaurantMenu.Module.Services
+@model FoodPartViewModel
+
+@if (Model.Spiciness > 0)
+{
+    <p>@T["Spiciness: {0} of {1}", Model.Spiciness, FoodRules.MaxSpiciness]</p>
+}

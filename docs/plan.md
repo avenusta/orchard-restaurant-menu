@@ -48,14 +48,13 @@ Order is chosen so the **passing requirements** are met as early as possible: sl
 
 ## Slice 3: Drinks, FoodPart and DrinkPart
 
-- `Models/FoodPart` (Spiciness, PortionGrams) and `Models/DrinkPart` (VolumeMl, IsAlcoholic, AbvPercent).
-- Migration: both part definitions, the `Drink` type, and FoodPart added to `Food`.
-- Drivers for both parts. DrinkPart validates that AbvPercent is set when the drink is alcoholic.
-- ABV validation logic with unit tests.
-- Theme: `Drink.cshtml`, `Drink.Summary.cshtml`, `FoodPart.cshtml` (spiciness icons) and `DrinkPart.cshtml`.
-- Recipe: sample drinks, and food items updated with spiciness and portion.
+- `Models/FoodPart` (Spiciness) and `Models/DrinkPart` (VolumeMl, IsAlcoholic).
+- Migration `UpdateFrom2Async`: both part definitions, FoodPart added to `Food`, and the `Drink` type (Title, Autoroute `/menu/{slug}`, MenuItemPart, DrinkPart).
+- Drivers for both parts. Spiciness must be 0–3 and volume must be greater than zero, each checked in its driver and a handler, with the rules as pure logic and unit tests.
+- Theme: a shared menu-line partial used by `Content-Food.Summary` and `Content-Drink.Summary` (and the same for the detail templates); `FoodPart.cshtml` (chili icons) and `DrinkPart.cshtml` ("330 ml" and an "18+" badge).
+- Recipe: drink categories (Soft drinks, Hot drinks, Wine & beer) in the same taxonomy, sample drinks, and spiciness on the sample foods.
 
-**Demo:** foods and drinks are mixed on `/menu`; an alcoholic drink without ABV is rejected.
+**Demo:** foods and drinks are listed together on `/menu`; food lines show chili icons; drink lines show volume and "18+"; a drink with no volume is rejected.
 
 ## Slice 4: Dietary tags, allergens, filters
 

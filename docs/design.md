@@ -39,16 +39,14 @@ Principles:
 
 | Member | Type |
 |---|---|
-| Spiciness | `enum Spiciness { None, Mild, Medium, Hot }` |
-| PortionGrams | `int?` |
+| Spiciness | `int` from 0 to 3, shown as chili icons |
 
 ### DrinkPart
 
 | Member | Type |
 |---|---|
-| VolumeMl | `int` |
-| IsAlcoholic | `bool` |
-| AbvPercent | `decimal?`, required when IsAlcoholic |
+| VolumeMl | `int`, must be greater than zero |
+| IsAlcoholic | `bool`, shown as an "18+" badge |
 
 ### Content types
 

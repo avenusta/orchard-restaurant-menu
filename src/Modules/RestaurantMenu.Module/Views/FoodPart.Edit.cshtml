@@ -1,0 +1,9 @@
+@using RestaurantMenu.Module.Services
+@model FoodPartViewModel
+
+<div class="mb-3">
+    <label asp-for="Spiciness" class="form-label">@T["Spiciness"]</label>
+    <input asp-for="Spiciness" class="form-control" type="number" min="0" max="@FoodRules.MaxSpiciness" step="1" />
+    <span asp-validation-for="Spiciness" class="text-danger"></span>
+    <span class="hint">@T["0 = not spicy, {0} = very hot.", FoodRules.MaxSpiciness]</span>
+</div>

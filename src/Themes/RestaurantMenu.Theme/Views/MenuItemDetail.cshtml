@@ -1,0 +1,11 @@
+@{
+    var contentShape = Model.ContentShape;
+}
+
+<article class="menu-item">
+    <h1 class="menu-item__title">@contentShape.ContentItem.DisplayText</h1>
+    <div class="menu-item__meta">
+        @await DisplayAsync(contentShape.Meta)
+    </div>
+    @await DisplayAsync(contentShape.Content)
+</article>

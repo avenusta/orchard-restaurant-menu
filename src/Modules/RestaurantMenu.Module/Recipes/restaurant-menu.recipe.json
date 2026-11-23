@@ -6,8 +6,12 @@
   "website": "",
   "version": "1.0.0",
   "issetuprecipe": true,
-  "categories": [ "default" ],
-  "tags": [ "restaurant" ],
+  "categories": [
+    "default"
+  ],
+  "tags": [
+    "restaurant"
+  ],
   "steps": [
     {
       "name": "feature",
@@ -26,7 +30,6 @@
         "OrchardCore.Settings",
         "OrchardCore.Themes",
         "OrchardCore.Users",
-
         "OrchardCore.Autoroute",
         "OrchardCore.ContentFields",
         "OrchardCore.Contents",
@@ -36,7 +39,6 @@
         "OrchardCore.Media",
         "OrchardCore.Taxonomies",
         "OrchardCore.Title",
-
         "RestaurantMenu.Module",
         "RestaurantMenu.Theme",
         "TheAdmin"
@@ -51,7 +53,9 @@
       "name": "settings",
       "LocalizationSettings": {
         "DefaultCulture": "en-US",
-        "SupportedCultures": [ "en-US" ]
+        "SupportedCultures": [
+          "en-US"
+        ]
       }
     },
     {
@@ -108,6 +112,36 @@
                 "TitlePart": {
                   "Title": "Desserts"
                 }
+              },
+              {
+                "ContentItemId": "menucategorysoftdrinks0001",
+                "ContentType": "MenuCategory",
+                "DisplayText": "Soft drinks",
+                "Latest": false,
+                "Published": false,
+                "TitlePart": {
+                  "Title": "Soft drinks"
+                }
+              },
+              {
+                "ContentItemId": "menucategoryhotdrinks00001",
+                "ContentType": "MenuCategory",
+                "DisplayText": "Hot drinks",
+                "Latest": false,
+                "Published": false,
+                "TitlePart": {
+                  "Title": "Hot drinks"
+                }
+              },
+              {
+                "ContentItemId": "menucategorywinebeer000001",
+                "ContentType": "MenuCategory",
+                "DisplayText": "Wine & beer",
+                "Latest": false,
+                "Published": false,
+                "TitlePart": {
+                  "Title": "Wine & beer"
+                }
               }
             ]
           }
@@ -140,6 +174,9 @@
             "Photo": {
               "Paths": []
             }
+          },
+          "FoodPart": {
+            "Spiciness": 0
           }
         },
         {
@@ -170,6 +207,9 @@
             "Photo": {
               "Paths": []
             }
+          },
+          "FoodPart": {
+            "Spiciness": 0
           }
         },
         {
@@ -200,6 +240,9 @@
             "Photo": {
               "Paths": []
             }
+          },
+          "FoodPart": {
+            "Spiciness": 2
           }
         },
         {
@@ -230,6 +273,9 @@
             "Photo": {
               "Paths": []
             }
+          },
+          "FoodPart": {
+            "Spiciness": 3
           }
         },
         {
@@ -260,6 +306,9 @@
             "Photo": {
               "Paths": []
             }
+          },
+          "FoodPart": {
+            "Spiciness": 1
           }
         },
         {
@@ -290,6 +339,9 @@
             "Photo": {
               "Paths": []
             }
+          },
+          "FoodPart": {
+            "Spiciness": 0
           }
         },
         {
@@ -320,6 +372,9 @@
             "Photo": {
               "Paths": []
             }
+          },
+          "FoodPart": {
+            "Spiciness": 0
           }
         },
         {
@@ -350,6 +405,213 @@
             "Photo": {
               "Paths": []
             }
+          },
+          "FoodPart": {
+            "Spiciness": 0
+          }
+        },
+        {
+          "ContentItemId": "drinkhomemadelemonade00001",
+          "ContentType": "Drink",
+          "DisplayText": "Homemade lemonade",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Homemade lemonade"
+          },
+          "AutoroutePart": {
+            "Path": "menu/homemade-lemonade"
+          },
+          "MenuItemPart": {
+            "Price": 1290,
+            "IsAvailable": true,
+            "SortOrder": 1,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategorysoftdrinks0001"
+              ]
+            },
+            "Description": {
+              "Text": "Fresh lemon, mint and a little elderflower."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          },
+          "DrinkPart": {
+            "VolumeMl": 500,
+            "IsAlcoholic": false
+          }
+        },
+        {
+          "ContentItemId": "drinkmineralwater000000001",
+          "ContentType": "Drink",
+          "DisplayText": "Mineral water",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Mineral water"
+          },
+          "AutoroutePart": {
+            "Path": "menu/mineral-water"
+          },
+          "MenuItemPart": {
+            "Price": 590,
+            "IsAvailable": true,
+            "SortOrder": 2,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategorysoftdrinks0001"
+              ]
+            },
+            "Description": {
+              "Text": "Still or sparkling."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          },
+          "DrinkPart": {
+            "VolumeMl": 330,
+            "IsAlcoholic": false
+          }
+        },
+        {
+          "ContentItemId": "drinkespresso0000000000001",
+          "ContentType": "Drink",
+          "DisplayText": "Espresso",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Espresso"
+          },
+          "AutoroutePart": {
+            "Path": "menu/espresso"
+          },
+          "MenuItemPart": {
+            "Price": 690,
+            "IsAvailable": true,
+            "SortOrder": 1,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategoryhotdrinks00001"
+              ]
+            },
+            "Description": {
+              "Text": "A short, strong coffee."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          },
+          "DrinkPart": {
+            "VolumeMl": 30,
+            "IsAlcoholic": false
+          }
+        },
+        {
+          "ContentItemId": "drinkcappuccino00000000001",
+          "ContentType": "Drink",
+          "DisplayText": "Cappuccino",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Cappuccino"
+          },
+          "AutoroutePart": {
+            "Path": "menu/cappuccino"
+          },
+          "MenuItemPart": {
+            "Price": 890,
+            "IsAvailable": true,
+            "SortOrder": 2,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategoryhotdrinks00001"
+              ]
+            },
+            "Description": {
+              "Text": "Espresso with steamed milk foam."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          },
+          "DrinkPart": {
+            "VolumeMl": 200,
+            "IsAlcoholic": false
+          }
+        },
+        {
+          "ContentItemId": "drinkdreherlager0000000001",
+          "ContentType": "Drink",
+          "DisplayText": "Dreher lager",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Dreher lager"
+          },
+          "AutoroutePart": {
+            "Path": "menu/dreher-lager"
+          },
+          "MenuItemPart": {
+            "Price": 1190,
+            "IsAvailable": true,
+            "SortOrder": 1,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategorywinebeer000001"
+              ]
+            },
+            "Description": {
+              "Text": "Hungarian pale lager on tap."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          },
+          "DrinkPart": {
+            "VolumeMl": 500,
+            "IsAlcoholic": true
+          }
+        },
+        {
+          "ContentItemId": "drinktokajifurmint00000001",
+          "ContentType": "Drink",
+          "DisplayText": "Tokaji Furmint",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Tokaji Furmint"
+          },
+          "AutoroutePart": {
+            "Path": "menu/tokaji-furmint"
+          },
+          "MenuItemPart": {
+            "Price": 1890,
+            "IsAvailable": true,
+            "SortOrder": 2,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategorywinebeer000001"
+              ]
+            },
+            "Description": {
+              "Text": "A glass of dry white wine from Tokaj."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          },
+          "DrinkPart": {
+            "VolumeMl": 150,
+            "IsAlcoholic": true
           }
         }
       ]

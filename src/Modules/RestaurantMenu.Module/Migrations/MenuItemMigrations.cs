@@ -35,10 +35,7 @@ public sealed class MenuItemMigrations(
             .WithPart("TitlePart", part => part.WithPosition("0"))
             .WithPart("AutoroutePart", part => part
                 .WithPosition("1")
-                .WithSettings(new AutoroutePartSettings
-                {
-                    Pattern = "menu/{{ ContentItem | display_text | slugify }}",
-                }))
+                .WithSettings(MenuItemRouteSettings()))
             .WithPart(nameof(MenuItemPart), part => part.WithPosition("2")));
 
         await SchemaBuilder.CreateMapIndexTableAsync<MenuItemPartIndex>(table => table
@@ -92,6 +89,41 @@ public sealed class MenuItemMigrations(
 
         return 2;
     }
+
+    public async Task<int> UpdateFrom2Async()
+    {
+        await contentDefinitionManager.AlterPartDefinitionAsync(nameof(FoodPart), part => part
+            .Attachable()
+            .WithDescription("How spicy a dish is."));
+
+        await contentDefinitionManager.AlterPartDefinitionAsync(nameof(DrinkPart), part => part
+            .Attachable()
+            .WithDescription("Volume of a drink and whether it contains alcohol."));
+
+        await contentDefinitionManager.AlterTypeDefinitionAsync("Food", type => type
+            .WithPart(nameof(FoodPart), part => part.WithPosition("3")));
+
+        await contentDefinitionManager.AlterTypeDefinitionAsync("Drink", type => type
+            .Creatable()
+            .Listable()
+            .Draftable()
+            .Versionable()
+            .Securable()
+            .WithPart("TitlePart", part => part.WithPosition("0"))
+            .WithPart("AutoroutePart", part => part
+                .WithPosition("1")
+                .WithSettings(MenuItemRouteSettings()))
+            .WithPart(nameof(MenuItemPart), part => part.WithPosition("2"))
+            .WithPart(nameof(DrinkPart), part => part.WithPosition("3")));
+
+        return 3;
+    }
+
+    private static AutoroutePartSettings MenuItemRouteSettings() =>
+        new()
+        {
+            Pattern = "menu/{{ ContentItem | display_text | slugify }}",
+        };
 
     private async Task CreateMenuCategoryTaxonomyAsync()
     {

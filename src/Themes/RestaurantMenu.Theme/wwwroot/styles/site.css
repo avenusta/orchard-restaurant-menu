@@ -142,3 +142,23 @@ body {
     object-fit: cover;
     border-radius: 0.5rem;
 }
+
+.spiciness {
+    margin-left: 0.25rem;
+    font-size: 0.875em;
+}
+
+.drink-info {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: normal;
+    color: #6b5d50;
+}
+
+.menu-item__meta {
+    margin-bottom: 0.75rem;
+}
+
+.menu-item__meta .drink-info {
+    margin-left: 0;
+}

@@ -21,6 +21,14 @@ public sealed class Startup : StartupBase
             .UseDisplayDriver<MenuItemPartDisplayDriver>()
             .AddHandler<MenuItemPartHandler>();
 
+        services.AddContentPart<FoodPart>()
+            .UseDisplayDriver<FoodPartDisplayDriver>()
+            .AddHandler<FoodPartHandler>();
+
+        services.AddContentPart<DrinkPart>()
+            .UseDisplayDriver<DrinkPartDisplayDriver>()
+            .AddHandler<DrinkPartHandler>();
+
         services.AddIndexProvider<MenuItemPartIndexProvider>();
         services.AddDataMigration<MenuItemMigrations>();
 

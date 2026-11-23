@@ -1,0 +1,9 @@
+@model DrinkPartViewModel
+
+<span class="drink-info">
+    @T["{0} ml", Model.VolumeMl]
+    @if (Model.IsAlcoholic)
+    {
+        <span class="menu-item__badge" title="@T["Contains alcohol"]">@T["18+"]</span>
+    }
+</span>

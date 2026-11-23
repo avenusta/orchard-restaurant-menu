@@ -1,0 +1,9 @@
+@model DrinkPartViewModel
+
+<p>
+    @T["{0} ml", Model.VolumeMl]
+    @if (Model.IsAlcoholic)
+    {
+        <strong>@T["18+"]</strong>
+    }
+</p>

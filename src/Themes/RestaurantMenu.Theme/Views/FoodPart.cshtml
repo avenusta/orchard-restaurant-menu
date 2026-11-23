@@ -1,0 +1,9 @@
+@using RestaurantMenu.Module.Services
+@model FoodPartViewModel
+
+@if (Model.Spiciness > 0)
+{
+    var label = T["Spiciness {0} of {1}", Model.Spiciness, FoodRules.MaxSpiciness];
+
+    <span class="spiciness" title="@label" aria-label="@label">@string.Concat(Enumerable.Repeat("🌶", Model.Spiciness))</span>
+}
