@@ -8,13 +8,9 @@ using RestaurantMenu.Module.ViewModels;
 
 namespace RestaurantMenu.Module.Drivers;
 
-public sealed class MenuItemPartDisplayDriver : ContentPartDisplayDriver<MenuItemPart>
+public sealed class MenuItemPartDisplayDriver(IStringLocalizer<MenuItemPartDisplayDriver> stringLocalizer)
+    : ContentPartDisplayDriver<MenuItemPart>
 {
-    internal readonly IStringLocalizer S;
-
-    public MenuItemPartDisplayDriver(IStringLocalizer<MenuItemPartDisplayDriver> stringLocalizer) =>
-        S = stringLocalizer;
-
     public override IDisplayResult Display(MenuItemPart part, BuildPartDisplayContext context) =>
         Initialize<MenuItemPartViewModel>(GetDisplayShapeType(context), viewModel => Populate(viewModel, part))
             .Location("Detail", "Content:5")
@@ -33,7 +29,7 @@ public sealed class MenuItemPartDisplayDriver : ContentPartDisplayDriver<MenuIte
         {
             context.Updater.ModelState.AddModelError(
                 $"{Prefix}.{nameof(viewModel.Price)}",
-                S["The price must be greater than zero and have at most {0} decimal places.", PriceRules.MaxDecimalPlaces]);
+                stringLocalizer["The price must be greater than zero and have at most {0} decimal places.", PriceRules.MaxDecimalPlaces]);
         }
 
         part.Price = viewModel.Price;

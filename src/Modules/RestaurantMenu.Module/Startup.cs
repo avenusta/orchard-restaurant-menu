@@ -9,6 +9,7 @@ using RestaurantMenu.Module.Handlers;
 using RestaurantMenu.Module.Indexes;
 using RestaurantMenu.Module.Migrations;
 using RestaurantMenu.Module.Models;
+using RestaurantMenu.Module.Services;
 
 namespace RestaurantMenu.Module;
 
@@ -22,5 +23,7 @@ public sealed class Startup : StartupBase
 
         services.AddIndexProvider<MenuItemPartIndexProvider>();
         services.AddDataMigration<MenuItemMigrations>();
+
+        services.AddScoped<IMenuQueryService, MenuQueryService>();
     }
 }

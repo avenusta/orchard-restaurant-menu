@@ -1,0 +1,11 @@
+@model OrchardCore.Media.ViewModels.DisplayMediaFieldViewModel
+
+@{
+    var path = Model.Paths?.FirstOrDefault();
+    var alt = Model.Field?.MediaTexts?.FirstOrDefault() ?? string.Empty;
+}
+
+@if (!string.IsNullOrEmpty(path))
+{
+    <img class="menu-line__photo" asset-src="@path" img-width="192" img-height="192" img-resize-mode="Crop" alt="@alt" loading="lazy" />
+}

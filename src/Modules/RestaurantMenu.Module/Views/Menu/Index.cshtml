@@ -1,0 +1,34 @@
+@model MenuViewModel
+
+@{
+    Title.AddSegment(T["Menu"]);
+}
+
+<h1 class="menu__title">@T["Menu"]</h1>
+
+@if (Model.Sections.Count == 0)
+{
+    <p>@T["The menu is empty."]</p>
+}
+else
+{
+    <nav class="menu__categories" aria-label="@T["Menu categories"]">
+        @foreach (var menuSection in Model.Sections)
+        {
+            <a href="#@menuSection.Anchor">@menuSection.Name</a>
+        }
+    </nav>
+
+    @foreach (var menuSection in Model.Sections)
+    {
+        <section id="@menuSection.Anchor" class="menu__section">
+            <h2 class="menu__section-title">@menuSection.Name</h2>
+            <ul class="menu__items">
+                @foreach (var item in menuSection.Items)
+                {
+                    <li>@await DisplayAsync(item)</li>
+                }
+            </ul>
+        </section>
+    }
+}

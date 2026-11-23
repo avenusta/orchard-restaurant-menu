@@ -1,0 +1,32 @@
+{
+  "MediaField": [
+    {
+      "differentiator": "MenuItemPart-Photo",
+      "displayType": "Summary",
+      "place": "Photo:1"
+    },
+    {
+      "differentiator": "MenuItemPart-Photo",
+      "displayType": "Detail",
+      "place": "Content:1"
+    }
+  ],
+  "TextField": [
+    {
+      "differentiator": "MenuItemPart-Description",
+      "place": "Content:2"
+    }
+  ],
+  "TaxonomyField": [
+    {
+      "differentiator": "MenuItemPart-Category",
+      "displayType": "Summary",
+      "place": "-"
+    },
+    {
+      "differentiator": "MenuItemPart-Category",
+      "displayType": "Detail",
+      "place": "Content:3"
+    }
+  ]
+}

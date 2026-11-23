@@ -9,3 +9,7 @@ Restaurant menu site on Orchard Core 3.0.1 (.NET 10), Razor theme, for the Óbud
 - `src/Modules/RestaurantMenu.Module`: all custom functionality
 - `src/Themes/RestaurantMenu.Theme`: all visuals
 - `justfile`: commands; run `just check` before committing
+
+## Conventions
+
+- Inject dependencies with primary constructors (`class Foo(IBar bar)`), not fields plus a separate constructor.

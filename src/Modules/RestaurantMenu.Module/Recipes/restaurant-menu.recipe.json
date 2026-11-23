@@ -55,6 +55,306 @@
       }
     },
     {
+      "name": "content",
+      "data": [
+        {
+          "ContentItemId": "menucategoriestaxonomy0001",
+          "ContentType": "Taxonomy",
+          "DisplayText": "Menu Categories",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Menu Categories"
+          },
+          "TaxonomyPart": {
+            "TermContentType": "MenuCategory",
+            "Terms": [
+              {
+                "ContentItemId": "menucategorystarters000001",
+                "ContentType": "MenuCategory",
+                "DisplayText": "Starters",
+                "Latest": false,
+                "Published": false,
+                "TitlePart": {
+                  "Title": "Starters"
+                }
+              },
+              {
+                "ContentItemId": "menucategorysoups000000001",
+                "ContentType": "MenuCategory",
+                "DisplayText": "Soups",
+                "Latest": false,
+                "Published": false,
+                "TitlePart": {
+                  "Title": "Soups"
+                }
+              },
+              {
+                "ContentItemId": "menucategorymains000000001",
+                "ContentType": "MenuCategory",
+                "DisplayText": "Mains",
+                "Latest": false,
+                "Published": false,
+                "TitlePart": {
+                  "Title": "Mains"
+                }
+              },
+              {
+                "ContentItemId": "menucategorydesserts000001",
+                "ContentType": "MenuCategory",
+                "DisplayText": "Desserts",
+                "Latest": false,
+                "Published": false,
+                "TitlePart": {
+                  "Title": "Desserts"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "ContentItemId": "foodlangos0000000000000001",
+          "ContentType": "Food",
+          "DisplayText": "Lángos",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Lángos"
+          },
+          "AutoroutePart": {
+            "Path": "menu/langos"
+          },
+          "MenuItemPart": {
+            "Price": 1490,
+            "IsAvailable": true,
+            "SortOrder": 1,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategorystarters000001"
+              ]
+            },
+            "Description": {
+              "Text": "Deep-fried flatbread with garlic, sour cream and cheese."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          }
+        },
+        {
+          "ContentItemId": "foodkorozottontoast0000001",
+          "ContentType": "Food",
+          "DisplayText": "Körözött on toast",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Körözött on toast"
+          },
+          "AutoroutePart": {
+            "Path": "menu/korozott-on-toast"
+          },
+          "MenuItemPart": {
+            "Price": 1290,
+            "IsAvailable": true,
+            "SortOrder": 2,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategorystarters000001"
+              ]
+            },
+            "Description": {
+              "Text": "Paprika-spiced curd cheese spread on toasted rye bread."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          }
+        },
+        {
+          "ContentItemId": "foodgoulashsoup00000000001",
+          "ContentType": "Food",
+          "DisplayText": "Goulash soup",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Goulash soup"
+          },
+          "AutoroutePart": {
+            "Path": "menu/goulash-soup"
+          },
+          "MenuItemPart": {
+            "Price": 2490,
+            "IsAvailable": true,
+            "SortOrder": 1,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategorysoups000000001"
+              ]
+            },
+            "Description": {
+              "Text": "Slow-cooked beef soup with paprika, potatoes and pinched noodles."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          }
+        },
+        {
+          "ContentItemId": "foodfishermanssoup00000001",
+          "ContentType": "Food",
+          "DisplayText": "Fisherman's soup",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Fisherman's soup"
+          },
+          "AutoroutePart": {
+            "Path": "menu/fishermans-soup"
+          },
+          "MenuItemPart": {
+            "Price": 2890.5,
+            "IsAvailable": false,
+            "SortOrder": 2,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategorysoups000000001"
+              ]
+            },
+            "Description": {
+              "Text": "Spicy carp soup in the Szeged style."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          }
+        },
+        {
+          "ContentItemId": "foodchickenpaprikash000001",
+          "ContentType": "Food",
+          "DisplayText": "Chicken paprikash",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Chicken paprikash"
+          },
+          "AutoroutePart": {
+            "Path": "menu/chicken-paprikash"
+          },
+          "MenuItemPart": {
+            "Price": 3990,
+            "IsAvailable": true,
+            "SortOrder": 1,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategorymains000000001"
+              ]
+            },
+            "Description": {
+              "Text": "Chicken in a creamy paprika sauce with egg dumplings."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          }
+        },
+        {
+          "ContentItemId": "foodstuffedcabbage00000001",
+          "ContentType": "Food",
+          "DisplayText": "Stuffed cabbage",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Stuffed cabbage"
+          },
+          "AutoroutePart": {
+            "Path": "menu/stuffed-cabbage"
+          },
+          "MenuItemPart": {
+            "Price": 3790,
+            "IsAvailable": true,
+            "SortOrder": 2,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategorymains000000001"
+              ]
+            },
+            "Description": {
+              "Text": "Cabbage rolls filled with pork and rice on sauerkraut."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          }
+        },
+        {
+          "ContentItemId": "foodsomloigaluska000000001",
+          "ContentType": "Food",
+          "DisplayText": "Somlói galuska",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Somlói galuska"
+          },
+          "AutoroutePart": {
+            "Path": "menu/somloi-galuska"
+          },
+          "MenuItemPart": {
+            "Price": 1890,
+            "IsAvailable": true,
+            "SortOrder": 1,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategorydesserts000001"
+              ]
+            },
+            "Description": {
+              "Text": "Sponge cake trifle with chocolate sauce, walnuts and cream."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          }
+        },
+        {
+          "ContentItemId": "foodgundelpancake000000001",
+          "ContentType": "Food",
+          "DisplayText": "Gundel pancake",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Gundel pancake"
+          },
+          "AutoroutePart": {
+            "Path": "menu/gundel-pancake"
+          },
+          "MenuItemPart": {
+            "Price": 1990,
+            "IsAvailable": true,
+            "SortOrder": 2,
+            "Category": {
+              "TaxonomyContentItemId": "menucategoriestaxonomy0001",
+              "TermContentItemIds": [
+                "menucategorydesserts000001"
+              ]
+            },
+            "Description": {
+              "Text": "Crêpe filled with walnut cream, served flambéed with chocolate sauce."
+            },
+            "Photo": {
+              "Paths": []
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "Roles",
       "Roles": [
         {

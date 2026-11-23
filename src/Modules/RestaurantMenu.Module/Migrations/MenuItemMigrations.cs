@@ -1,27 +1,32 @@
 using OrchardCore.Autoroute.Models;
+using OrchardCore.ContentFields.Fields;
+using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Metadata;
 using OrchardCore.ContentManagement.Metadata.Settings;
 using OrchardCore.Data.Migration;
+using OrchardCore.Media.Fields;
+using OrchardCore.Media.Settings;
+using OrchardCore.Taxonomies.Fields;
+using OrchardCore.Taxonomies.Models;
+using OrchardCore.Taxonomies.Settings;
+using OrchardCore.Title.Models;
 using RestaurantMenu.Module.Indexes;
 using RestaurantMenu.Module.Models;
 using YesSql.Sql;
 
 namespace RestaurantMenu.Module.Migrations;
 
-public sealed class MenuItemMigrations : DataMigration
+public sealed class MenuItemMigrations(
+    IContentDefinitionManager contentDefinitionManager,
+    IContentManager contentManager) : DataMigration
 {
-    private readonly IContentDefinitionManager _contentDefinitionManager;
-
-    public MenuItemMigrations(IContentDefinitionManager contentDefinitionManager) =>
-        _contentDefinitionManager = contentDefinitionManager;
-
     public async Task<int> CreateAsync()
     {
-        await _contentDefinitionManager.AlterPartDefinitionAsync(nameof(MenuItemPart), part => part
+        await contentDefinitionManager.AlterPartDefinitionAsync(nameof(MenuItemPart), part => part
             .Attachable()
             .WithDescription("Price, availability and ordering of an item on the menu."));
 
-        await _contentDefinitionManager.AlterTypeDefinitionAsync("Food", type => type
+        await contentDefinitionManager.AlterTypeDefinitionAsync("Food", type => type
             .Creatable()
             .Listable()
             .Draftable()
@@ -50,5 +55,57 @@ public sealed class MenuItemMigrations : DataMigration
                 nameof(MenuItemPartIndex.ContentItemId)));
 
         return 1;
+    }
+
+    public async Task<int> UpdateFrom1Async()
+    {
+        await contentDefinitionManager.AlterTypeDefinitionAsync(MenuCategoryTaxonomy.TermContentType, type => type
+            .WithDisplayName("Menu category")
+            .WithPart("TitlePart", part => part.WithPosition("0")));
+
+        await CreateMenuCategoryTaxonomyAsync();
+
+        await contentDefinitionManager.AlterPartDefinitionAsync(nameof(MenuItemPart), part => part
+            .WithField(MenuItemFields.Category, field => field
+                .OfType(nameof(TaxonomyField))
+                .WithDisplayName("Category")
+                .WithPosition("0")
+                .WithSettings(new TaxonomyFieldSettings
+                {
+                    TaxonomyContentItemId = MenuCategoryTaxonomy.ContentItemId,
+                    Required = true,
+                    Unique = true,
+                }))
+            .WithField(MenuItemFields.Description, field => field
+                .OfType(nameof(TextField))
+                .WithDisplayName("Description")
+                .WithEditor("TextArea")
+                .WithPosition("1"))
+            .WithField(MenuItemFields.Photo, field => field
+                .OfType(nameof(MediaField))
+                .WithDisplayName("Photo")
+                .WithPosition("2")
+                .WithSettings(new MediaFieldSettings
+                {
+                    Multiple = false,
+                })));
+
+        return 2;
+    }
+
+    private async Task CreateMenuCategoryTaxonomyAsync()
+    {
+        if (await contentManager.GetAsync(MenuCategoryTaxonomy.ContentItemId) is not null)
+        {
+            return;
+        }
+
+        var taxonomy = await contentManager.NewAsync("Taxonomy");
+        taxonomy.ContentItemId = MenuCategoryTaxonomy.ContentItemId;
+        taxonomy.DisplayText = "Menu Categories";
+        taxonomy.Alter<TitlePart>(part => part.Title = "Menu Categories");
+        taxonomy.Alter<TaxonomyPart>(part => part.TermContentType = MenuCategoryTaxonomy.TermContentType);
+
+        await contentManager.CreateAsync(taxonomy, VersionOptions.Published);
     }
 }

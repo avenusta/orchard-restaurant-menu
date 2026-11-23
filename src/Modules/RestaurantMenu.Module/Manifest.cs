@@ -12,5 +12,8 @@ using OrchardCore.Modules.Manifest;
         "OrchardCore.Contents",
         "OrchardCore.Title",
         "OrchardCore.Autoroute",
+        "OrchardCore.ContentFields",
+        "OrchardCore.Media",
+        "OrchardCore.Taxonomies",
     ]
 )]

@@ -1,0 +1,19 @@
+@using OrchardCore.Autoroute.Models
+@using OrchardCore.ContentManagement
+@using RestaurantMenu.Module.Models
+
+@{
+    var contentItem = (ContentItem)Model.ContentItem;
+    var path = contentItem.Get<AutoroutePart>(nameof(AutoroutePart))?.Path;
+    var isAvailable = contentItem.Get<MenuItemPart>(nameof(MenuItemPart))?.IsAvailable ?? true;
+}
+
+<article class="menu-line@(isAvailable ? string.Empty : " menu-line--sold-out")">
+    <div class="menu-line__body">
+        <h3 class="menu-line__title">
+            <a href="@Url.Content($"~/{path}")">@contentItem.DisplayText</a>
+        </h3>
+        @await DisplayAsync(Model.Content)
+    </div>
+    @await DisplayAsync(Model.Photo)
+</article>

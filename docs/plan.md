@@ -35,13 +35,14 @@ Order is chosen so the **passing requirements** are met as early as possible: sl
 
 ## Slice 2: Categories and the public /menu page
 
-- Migration: the *Menu Categories* taxonomy, plus Category (TaxonomyField), Description (HtmlField) and Photo (MediaField) on MenuItemPart.
-- `Services/IMenuQueryService` and `MenuQueryService`: published items from the index, ordered by SortOrder and grouped by category.
-- `Controllers/MenuController` with `[Route("menu")]`.
-- Theme: the menu page view, `Food.Summary.cshtml`, a greyed-out "Sold out" style, `placement.json` for part and field positions, and a main navigation link.
-- Recipe: sample category terms and around 6 sample foods.
+- Migration `UpdateFrom1Async`: the `MenuCategory` term type, the *Menu Categories* taxonomy (fixed content item ID), and Category (TaxonomyField, required, single), Description (multi-line TextField) and Photo (MediaField, single) on MenuItemPart.
+- `Services/MenuGrouping`: pure grouping by category in taxonomy order, items sorted by SortOrder then title, with unit tests.
+- `Services/IMenuQueryService` and `MenuQueryService`: published items from the index, grouped with `MenuGrouping`.
+- `Controllers/MenuController` with `[Route("menu")]`: one page, a section per category, anchor links (`/menu#soups`).
+- Theme: `Content-Food.Summary.cshtml`, a greyed-out "Sold out" line, `placement.json` for field positions, and a hardcoded "Menu" link in the layout header.
+- Recipe: four sample categories and eight sample foods, no photos.
 
-**Demo:** `/menu` lists the foods grouped by category; an unavailable item shows as "Sold out"; category term pages work.
+**Demo:** `/menu` lists the foods grouped by category; an unavailable item shows as "Sold out"; a food without a category can't be published.
 
 ✅ After this slice the minimum passing requirements are met.
 

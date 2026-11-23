@@ -30,9 +30,9 @@ Principles:
 | IsAvailable | `bool` | ✔ |
 | DietaryTags | `[Flags] enum DietaryTags { None, Vegetarian, Vegan, GlutenFree }` | ✔ |
 | SortOrder | `int` | ✔ |
-| Description | HtmlField | |
+| Description | TextField (multi-line) | |
 | Photo | MediaField | |
-| Category | TaxonomyField → *Menu Categories* | |
+| Category | TaxonomyField → *Menu Categories* (required, single) | |
 | Allergens | TaxonomyField → *Allergens* | |
 
 ### FoodPart
@@ -60,7 +60,7 @@ Principles:
 
 ### Taxonomies (created in migrations)
 
-- **Menu Categories:** Starters, Mains, Desserts, Hot drinks, … Terms are seeded by the recipe.
+- **Menu Categories:** Starters, Soups, Mains, Desserts, … The taxonomy is created in the migration; its terms (`MenuCategory` items) are seeded by the recipe. There are no category pages: `/menu` has a section per category.
 - **Allergens:** the 14 EU allergens, seeded in the migration.
 
 ### Index
@@ -104,9 +104,9 @@ All user-facing strings use `S[]`/`H[]`. The site is English only for now.
 |---|---|
 | `/` | Landing page (FlowPart) |
 | `/menu` | `MenuController.Index` |
+| `/menu#{category}` | Jump to a category section |
 | `/menu?diet=vegan&maxPrice=3000&free=nuts&available=true` | Same page, filtered |
 | `/menu/{slug}` | Autoroute → Food/Drink detail |
-| `/categories/{term}` | Taxonomy term pages |
 | `/search?q=` | Lucene search |
 | `/admin/restaurant/menu` | Admin menu overview |
 
