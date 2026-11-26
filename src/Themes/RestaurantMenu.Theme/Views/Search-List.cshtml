@@ -1,0 +1,7 @@
+@model OrchardCore.Search.ViewModels.SearchIndexViewModel
+
+<h1 class="search__title">@(string.IsNullOrWhiteSpace(Model.PageTitle) ? T["Search the menu"] : Model.PageTitle)</h1>
+
+@await DisplayAsync(Model.SearchForm)
+@await DisplayAsync(Model.SearchResults)
+@await DisplayAsync(Model.Pager)

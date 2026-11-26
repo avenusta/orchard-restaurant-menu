@@ -4,6 +4,7 @@ using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Metadata;
 using OrchardCore.ContentManagement.Metadata.Settings;
 using OrchardCore.Data.Migration;
+using OrchardCore.Flows.Models;
 using OrchardCore.Media.Fields;
 using OrchardCore.Media.Settings;
 using OrchardCore.Taxonomies.Fields;
@@ -117,6 +118,71 @@ public sealed class MenuItemMigrations(
             .WithPart(nameof(DrinkPart), part => part.WithPosition("3")));
 
         return 3;
+    }
+
+    public async Task<int> UpdateFrom3Async()
+    {
+        await SchemaBuilder.AlterIndexTableAsync<MenuItemPartIndex>(table => table
+            .AddColumn<bool>(nameof(MenuItemPartIndex.IsVegetarian), column => column.NotNull().WithDefault(false)));
+
+        await SchemaBuilder.AlterIndexTableAsync<MenuItemPartIndex>(table => table
+            .AddColumn<bool>(nameof(MenuItemPartIndex.IsVegan), column => column.NotNull().WithDefault(false)));
+
+        await SchemaBuilder.AlterIndexTableAsync<MenuItemPartIndex>(table => table
+            .AddColumn<bool>(nameof(MenuItemPartIndex.IsGlutenFree), column => column.NotNull().WithDefault(false)));
+
+        return 4;
+    }
+
+    public async Task<int> UpdateFrom4Async()
+    {
+        await contentDefinitionManager.AlterPartDefinitionAsync(LandingPageTypes.HeroWidget, part => part
+            .WithField("Heading", field => field
+                .OfType(nameof(TextField))
+                .WithDisplayName("Heading")
+                .WithPosition("0"))
+            .WithField("Lead", field => field
+                .OfType(nameof(TextField))
+                .WithDisplayName("Lead")
+                .WithEditor("TextArea")
+                .WithPosition("1"))
+            .WithField("Link", field => field
+                .OfType(nameof(LinkField))
+                .WithDisplayName("Link")
+                .WithPosition("2")));
+
+        await contentDefinitionManager.AlterTypeDefinitionAsync(LandingPageTypes.HeroWidget, type => type
+            .WithDisplayName("Hero")
+            .Stereotype("Widget")
+            .WithPart(LandingPageTypes.HeroWidget));
+
+        await contentDefinitionManager.AlterTypeDefinitionAsync(LandingPageTypes.TextWidget, type => type
+            .WithDisplayName("Text")
+            .Stereotype("Widget")
+            .WithPart("HtmlBodyPart"));
+
+        await contentDefinitionManager.AlterTypeDefinitionAsync(LandingPageTypes.LandingPage, type => type
+            .WithDisplayName("Landing page")
+            .Creatable()
+            .Listable()
+            .Draftable()
+            .Versionable()
+            .Securable()
+            .WithPart("TitlePart", part => part.WithPosition("0"))
+            .WithPart("AutoroutePart", part => part
+                .WithPosition("1")
+                .WithSettings(new AutoroutePartSettings
+                {
+                    Pattern = "{{ ContentItem | display_text | slugify }}",
+                }))
+            .WithPart(nameof(FlowPart), part => part
+                .WithPosition("2")
+                .WithSettings(new FlowPartSettings
+                {
+                    ContainedContentTypes = [LandingPageTypes.HeroWidget, LandingPageTypes.TextWidget],
+                })));
+
+        return 5;
     }
 
     private static AutoroutePartSettings MenuItemRouteSettings() =>

@@ -1,0 +1,7 @@
+@using RestaurantMenu.Module.Services
+@inject IRestaurantContext RestaurantContext
+
+@{
+    var restaurant = await RestaurantContext.GetCurrentAsync();
+}
+@PriceFormatter.Format((decimal)Model.Amount, restaurant.Currency)

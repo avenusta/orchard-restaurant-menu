@@ -1,0 +1,21 @@
+@using OrchardCore.ContentManagement.Display
+@model OrchardCore.Search.ViewModels.SearchResultsViewModel
+@inject IContentItemDisplayManager DisplayManager
+
+@{
+    var terms = Context.Request.Query["Terms"].ToString();
+}
+
+@if (Model.ContentItems is not null && Model.ContentItems.Any())
+{
+    <ul class="menu__items">
+        @foreach (var contentItem in Model.ContentItems)
+        {
+            <li>@await DisplayAsync(await DisplayManager.BuildDisplayAsync(contentItem, null, "Summary"))</li>
+        }
+    </ul>
+}
+else if (!string.IsNullOrWhiteSpace(terms))
+{
+    <p class="search__empty">@T["Nothing on the menu matches \"{0}\".", terms]</p>
+}

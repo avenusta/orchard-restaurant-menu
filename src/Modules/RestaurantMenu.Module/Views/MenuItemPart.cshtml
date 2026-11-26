@@ -1,7 +1,7 @@
 @model MenuItemPartViewModel
 
 <p>
-    @T["Price: {0}", Model.Price.ToString("N2")]
+    @T["Price:"] @await DisplayAsync(await New.Price(Amount: Model.Price))
     @if (!Model.IsAvailable)
     {
         <strong>@T["Sold out"]</strong>

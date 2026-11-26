@@ -13,6 +13,8 @@ using OrchardCore.Modules.Manifest;
         "OrchardCore.Title",
         "OrchardCore.Autoroute",
         "OrchardCore.ContentFields",
+        "OrchardCore.Flows",
+        "OrchardCore.Html",
         "OrchardCore.Media",
         "OrchardCore.Taxonomies",
     ]

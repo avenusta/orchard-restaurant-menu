@@ -56,43 +56,43 @@ Order is chosen so the **passing requirements** are met as early as possible: sl
 
 **Demo:** foods and drinks are listed together on `/menu`; food lines show chili icons; drink lines show volume and "18+"; a drink with no volume is rejected.
 
-## Slice 4: Dietary tags, allergens, filters
+## Slice 4: Dietary tags and the menu filter
 
-- The `DietaryTags` flags enum on MenuItemPart and in the index (migration update). The handler normalises tags (Vegan implies Vegetarian).
-- Migration: the *Allergens* taxonomy with the 14 EU allergens, and an Allergens TaxonomyField on MenuItemPart.
-- `MenuFilter` (parses diet, maxPrice, free and available from the query string). `MenuQueryService` applies it to the index and the taxonomy index.
+- `DietaryTags` flags enum (Vegetarian, Vegan, GlutenFree) on MenuItemPart: editor checkboxes, a new `DietaryTags` column in `MenuItemPartIndex` (migration step), and the handler normalises tags (Vegan implies Vegetarian).
+- `MenuFilter`: parses `diet` and `available` from the query string. `MenuQueryService` applies it to the index query.
 - Unit tests for filter parsing and tag normalisation.
-- Theme: the filter bar as an ad-hoc shape, plus diet badges and allergen icons on summaries.
+- Theme: a filter row on `/menu` as an ad-hoc shape (diet links plus "available only"), and diet badges on menu lines.
+- Recipe: diet tags on the sample items.
 
-**Demo:** `/menu?diet=vegan&free=nuts&maxPrice=3000&available=true` filters correctly.
+**Demo:** `/menu?diet=vegan&available=true` shows only available vegan items; a Vegan item is also listed under Vegetarian.
 
-## Slice 5: Restaurant settings, IRestaurantContext, permissions, admin menu
+## Slice 5: Restaurant settings, IRestaurantContext, permission, admin menu
 
-- `Settings/RestaurantSettings` (Name, Address, OpeningHours, Currency) with its display driver, shown as the "Restaurant" settings section.
+- `Settings/RestaurantSettings` (Name, Address, OpeningHours as free text, Currency code) with its display driver, shown as the "Restaurant" settings section.
 - `Services/IRestaurantContext` and `SiteSettingsRestaurantContext`.
-- Price formatting using the currency and culture. A price ad-hoc shape replaces the raw decimal everywhere.
+- `PriceFormatter` (pure, unit-tested): `2 490 Ft` for HUF without decimals, `12.50 €` for EUR. A price ad-hoc shape replaces the raw decimal everywhere.
 - `Permissions/MenuPermissions` with `ManageMenu` (granted to Administrator and Editor).
-- `AdminMenu : INavigationProvider` adds Restaurant → Settings.
+- `AdminMenu : INavigationProvider` adds Restaurant → Settings, visible with `ManageMenu`.
 - Theme: the footer shows the name, address and opening hours.
-- Unit tests for opening-hours formatting.
 - Recipe: sample restaurant settings.
 
-**Demo:** edit the restaurant settings and see the footer and currency change; a user without `ManageMenu` doesn't see the menu entry.
+**Demo:** edit the restaurant settings and see the footer and prices change; a user without `ManageMenu` doesn't see the Restaurant menu.
 
 ## Slice 6: Admin menu overview
 
 - `Controllers/Admin/MenuOverviewController` at `/admin/restaurant/menu`: lists all items by category with price and availability. A POST toggles availability. Both actions authorize against `ManageMenu`.
-- Admin views, and a "Menu overview" entry in the AdminMenu.
+- Admin views, and a "Menu overview" entry in the Restaurant admin menu.
 - Uses `IMenuQueryService`, so there's no duplicated query code.
 
-**Demo:** toggle an item to sold out from the overview and see it greyed out on `/menu`; a forbidden user gets 403.
+**Demo:** toggle an item to sold out from the overview and see it greyed out on `/menu`; a user without `ManageMenu` gets 403.
 
 ## Slice 7: Landing page and search
 
-- Recipe: the landing Page (FlowPart: hero, intro, link to `/menu`) set as the homepage, and a Lucene index plus search settings covering Food and Drink.
-- Theme: templates for the landing page and the search results.
+- Recipe: the landing Page (FlowPart: hero, intro, link to `/menu`) set as the homepage, so `/` no longer shows "page not found".
+- Recipe: a Lucene index covering Food and Drink, and the Search feature configured to use it at `/search`.
+- Theme: templates for the landing page and the search results (reusing the `MenuLine` shape).
 
-**Demo:** the homepage looks finished, and `/search?q=goulash` finds the dish.
+**Demo:** the homepage shows the hero and links to the menu; `/search?q=goulash` finds the dish.
 
 ## Slice 8: Demo hardening
 

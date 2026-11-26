@@ -1,0 +1,25 @@
+@using OrchardCore.ContentFields.Fields
+@using OrchardCore.ContentManagement
+@using RestaurantMenu.Module.Models
+
+@{
+    var hero = ((ContentItem)Model.ContentItem).Get<ContentPart>(LandingPageTypes.HeroWidget);
+    var heading = hero?.Get<TextField>("Heading")?.Text;
+    var lead = hero?.Get<TextField>("Lead")?.Text;
+    var link = hero?.Get<LinkField>("Link");
+}
+
+<section class="hero">
+    @if (!string.IsNullOrWhiteSpace(heading))
+    {
+        <h1 class="hero__heading">@heading</h1>
+    }
+    @if (!string.IsNullOrWhiteSpace(lead))
+    {
+        <p class="hero__lead">@lead</p>
+    }
+    @if (!string.IsNullOrWhiteSpace(link?.Url))
+    {
+        <a class="hero__link" href="@Url.Content(link.Url)">@(string.IsNullOrWhiteSpace(link.Text) ? link.Url : link.Text)</a>
+    }
+</section>

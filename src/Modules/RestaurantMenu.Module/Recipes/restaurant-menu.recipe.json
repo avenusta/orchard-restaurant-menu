@@ -39,6 +39,9 @@
         "OrchardCore.Media",
         "OrchardCore.Taxonomies",
         "OrchardCore.Title",
+        "OrchardCore.Indexing",
+        "OrchardCore.Search",
+        "OrchardCore.Lucene",
         "RestaurantMenu.Module",
         "RestaurantMenu.Theme",
         "TheAdmin"
@@ -56,11 +59,77 @@
         "SupportedCultures": [
           "en-US"
         ]
+      },
+      "RestaurantSettings": {
+        "Name": "Paprika Bistro",
+        "Address": "Bécsi út 96/B, 1034 Budapest",
+        "OpeningHours": "Mon-Sun 11:00-22:00",
+        "Currency": "HUF"
+      },
+      "HomeRoute": {
+        "Action": "Display",
+        "Controller": "Item",
+        "Area": "OrchardCore.Contents",
+        "ContentItemId": "landingpagehome00000000011"
       }
     },
     {
       "name": "content",
       "data": [
+        {
+          "ContentItemId": "landingpagehome00000000011",
+          "ContentType": "LandingPage",
+          "DisplayText": "Home",
+          "Latest": true,
+          "Published": true,
+          "TitlePart": {
+            "Title": "Home"
+          },
+          "AutoroutePart": {
+            "Path": "home"
+          },
+          "FlowPart": {
+            "Widgets": [
+              {
+                "ContentItemId": "herowidgethome000000000010",
+                "ContentType": "HeroWidget",
+                "DisplayText": "",
+                "Latest": false,
+                "Published": false,
+                "HeroWidget": {
+                  "Heading": {
+                    "Text": "Hungarian classics, made fresh every day"
+                  },
+                  "Lead": {
+                    "Text": "Slow-cooked goulash, paprikash, lángos and homemade desserts in the heart of Óbuda."
+                  },
+                  "Link": {
+                    "Url": "~/menu",
+                    "Text": "See the menu"
+                  }
+                },
+                "FlowMetadata": {
+                  "Alignment": 3,
+                  "Size": 100
+                }
+              },
+              {
+                "ContentItemId": "textwidgethome000000000001",
+                "ContentType": "TextWidget",
+                "DisplayText": "",
+                "Latest": false,
+                "Published": false,
+                "HtmlBodyPart": {
+                  "Html": "<p>Our kitchen cooks with seasonal produce from local farms. Every dish on the menu shows whether it is vegetarian, vegan or gluten-free, and how spicy it is.</p>"
+                },
+                "FlowMetadata": {
+                  "Alignment": 3,
+                  "Size": 100
+                }
+              }
+            ]
+          }
+        },
         {
           "ContentItemId": "menucategoriestaxonomy0001",
           "ContentType": "Taxonomy",
@@ -173,7 +242,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 1
           },
           "FoodPart": {
             "Spiciness": 0
@@ -206,7 +276,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 1
           },
           "FoodPart": {
             "Spiciness": 0
@@ -239,7 +310,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 0
           },
           "FoodPart": {
             "Spiciness": 2
@@ -272,7 +344,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 4
           },
           "FoodPart": {
             "Spiciness": 3
@@ -305,7 +378,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 0
           },
           "FoodPart": {
             "Spiciness": 1
@@ -338,7 +412,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 0
           },
           "FoodPart": {
             "Spiciness": 0
@@ -371,7 +446,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 1
           },
           "FoodPart": {
             "Spiciness": 0
@@ -404,7 +480,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 1
           },
           "FoodPart": {
             "Spiciness": 0
@@ -437,7 +514,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 7
           },
           "DrinkPart": {
             "VolumeMl": 500,
@@ -471,7 +549,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 7
           },
           "DrinkPart": {
             "VolumeMl": 330,
@@ -505,7 +584,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 7
           },
           "DrinkPart": {
             "VolumeMl": 30,
@@ -539,7 +619,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 5
           },
           "DrinkPart": {
             "VolumeMl": 200,
@@ -573,7 +654,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 3
           },
           "DrinkPart": {
             "VolumeMl": 500,
@@ -607,7 +689,8 @@
             },
             "Photo": {
               "Paths": []
-            }
+            },
+            "DietaryTags": 7
           },
           "DrinkPart": {
             "VolumeMl": 150,
@@ -617,12 +700,67 @@
       ]
     },
     {
+      "name": "CreateOrUpdateIndexProfile",
+      "indexes": [
+        {
+          "IndexName": "Search",
+          "ProviderName": "Lucene",
+          "Type": "Content",
+          "Name": "Search",
+          "Properties": {
+            "LuceneIndexMetadata": {
+              "StoreSourceData": false,
+              "AnalyzerName": "standardanalyzer"
+            },
+            "ContentIndexMetadata": {
+              "IndexLatest": false,
+              "IndexedContentTypes": [
+                "Food",
+                "Drink"
+              ],
+              "Culture": "any"
+            },
+            "LuceneIndexDefaultQueryMetadata": {
+              "DefaultVersion": "LUCENE_30",
+              "QueryAnalyzerName": "standardanalyzer",
+              "AllowLuceneQueries": false,
+              "DefaultSearchFields": [
+                "Content.ContentItem.FullText"
+              ]
+            }
+          },
+          "IndexLatest": false,
+          "Culture": "any",
+          "IndexedContentTypes": [
+            "Food",
+            "Drink"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "SearchSettings": {
+        "DefaultIndexProfileName": "Search"
+      }
+    },
+    {
       "name": "Roles",
       "Roles": [
         {
           "Name": "Editor",
           "Description": "Grants users the ability to edit existing content.",
-          "Permissions": []
+          "Permissions": [
+            "ManageMenu"
+          ]
+        },
+        {
+          "Name": "Anonymous",
+          "Description": "Anonymous role",
+          "Permissions": [
+            "ViewContent",
+            "QueryIndex_Search"
+          ]
         }
       ]
     }

@@ -1,0 +1,25 @@
+@using RestaurantMenu.Module.Settings
+@model RestaurantSettingsViewModel
+
+<div class="mb-3">
+    <label asp-for="Name" class="form-label">@T["Restaurant name"]</label>
+    <input asp-for="Name" class="form-control" />
+    <span class="hint">@T["Leave empty to use the site name."]</span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Address" class="form-label">@T["Address"]</label>
+    <input asp-for="Address" class="form-control" />
+</div>
+
+<div class="mb-3">
+    <label asp-for="OpeningHours" class="form-label">@T["Opening hours"]</label>
+    <textarea asp-for="OpeningHours" class="form-control" rows="4"></textarea>
+    <span class="hint">@T["Shown as written in the site footer, one line per row."]</span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Currency" class="form-label">@T["Currency"]</label>
+    <select asp-for="Currency" class="form-select" asp-items="PriceCurrencies.All.Select(code => new SelectListItem(code, code))"></select>
+    <span asp-validation-for="Currency" class="text-danger"></span>
+</div>

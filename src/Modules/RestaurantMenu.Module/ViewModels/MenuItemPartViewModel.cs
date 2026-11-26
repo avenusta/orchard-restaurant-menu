@@ -11,6 +11,12 @@ public class MenuItemPartViewModel
 
     public int SortOrder { get; set; }
 
+    public bool IsVegetarian { get; set; }
+
+    public bool IsVegan { get; set; }
+
+    public bool IsGlutenFree { get; set; }
+
     [BindNever]
     public MenuItemPart? MenuItemPart { get; set; }
 }

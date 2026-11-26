@@ -15,11 +15,12 @@ public sealed class MenuController(
     ISlugService slugService) : Controller
 {
     [Route("menu")]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? diet, string? available)
     {
+        var filter = MenuFilter.Parse(diet, available);
         var sections = new List<MenuSectionViewModel>();
 
-        foreach (var section in await menuQueryService.GetMenuAsync())
+        foreach (var section in await menuQueryService.GetMenuAsync(filter))
         {
             var items = new List<IShape>();
 
@@ -36,6 +37,6 @@ public sealed class MenuController(
             });
         }
 
-        return View(new MenuViewModel { Sections = sections });
+        return View(new MenuViewModel { Filter = filter, Sections = sections });
     }
 }

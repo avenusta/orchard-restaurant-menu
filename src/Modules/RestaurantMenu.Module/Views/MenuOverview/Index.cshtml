@@ -1,0 +1,53 @@
+@model MenuOverviewViewModel
+
+<zone Name="Title"><h1>@RenderTitleSegments(T["Menu overview"])</h1></zone>
+
+@if (Model.Sections.Count == 0)
+{
+    <p class="alert alert-info">@T["The menu has no published items yet."]</p>
+}
+
+@foreach (var menuSection in Model.Sections)
+{
+    <h2 class="h4 mt-4">@menuSection.Name</h2>
+    <table class="table table-sm align-middle">
+        <thead>
+            <tr>
+                <th>@T["Item"]</th>
+                <th>@T["Type"]</th>
+                <th class="text-end">@T["Price"]</th>
+                <th>@T["Status"]</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in menuSection.Items)
+            {
+                <tr>
+                    <td>
+                        <a asp-area="OrchardCore.Contents" asp-controller="Admin" asp-action="Edit" asp-route-contentItemId="@item.ContentItemId">@item.Title</a>
+                    </td>
+                    <td>@item.ContentType</td>
+                    <td class="text-end">@await DisplayAsync(await New.Price(Amount: item.Price))</td>
+                    <td>
+                        @if (item.IsAvailable)
+                        {
+                            <span class="badge text-bg-success">@T["Available"]</span>
+                        }
+                        else
+                        {
+                            <span class="badge text-bg-secondary">@T["Sold out"]</span>
+                        }
+                    </td>
+                    <td class="text-end">
+                        <form asp-action="ToggleAvailability" asp-route-contentItemId="@item.ContentItemId" method="post">
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">
+                                @(item.IsAvailable ? T["Mark sold out"] : T["Mark available"])
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

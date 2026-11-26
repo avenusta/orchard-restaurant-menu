@@ -1,0 +1,38 @@
+@using RestaurantMenu.Module.Services
+
+@{
+    var filter = (MenuFilter)Model.Filter;
+
+    string Href(string? dietKey, bool availableOnly)
+    {
+        var parameters = new List<string>();
+
+        if (dietKey is not null)
+        {
+            parameters.Add($"diet={dietKey}");
+        }
+
+        if (availableOnly)
+        {
+            parameters.Add("available=true");
+        }
+
+        return parameters.Count == 0 ? Url.Content("~/menu") : Url.Content($"~/menu?{string.Join("&", parameters)}");
+    }
+
+    var dietLabels = new Dictionary<string, string>
+    {
+        ["vegetarian"] = T["Vegetarian"].Value,
+        ["vegan"] = T["Vegan"].Value,
+        ["gluten-free"] = T["Gluten-free"].Value,
+    };
+}
+
+<nav class="menu-filter" aria-label="@T["Filter the menu"]">
+    <a class="menu-filter__option@(filter.DietKey is null ? " menu-filter__option--active" : string.Empty)" href="@Href(null, filter.AvailableOnly)">@T["All"]</a>
+    @foreach (var dietKey in MenuFilter.Diets.Keys)
+    {
+        <a class="menu-filter__option@(filter.DietKey == dietKey ? " menu-filter__option--active" : string.Empty)" href="@Href(dietKey, filter.AvailableOnly)">@dietLabels[dietKey]</a>
+    }
+    <a class="menu-filter__option menu-filter__option--toggle@(filter.AvailableOnly ? " menu-filter__option--active" : string.Empty)" href="@Href(filter.DietKey, !filter.AvailableOnly)">@T["Available only"]</a>
+</nav>

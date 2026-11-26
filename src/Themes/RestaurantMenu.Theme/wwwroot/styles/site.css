@@ -162,3 +162,127 @@ body {
 .menu-item__meta .drink-info {
     margin-left: 0;
 }
+
+.menu-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.menu-filter__option {
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--color-accent);
+    border-radius: 999px;
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.menu-filter__option--toggle {
+    margin-left: auto;
+}
+
+.menu-filter__option--active {
+    color: #fff;
+    background: var(--color-accent);
+}
+
+.diet-tags {
+    margin-left: 0.5rem;
+}
+
+.diet-tag {
+    padding: 0.0625rem 0.5rem;
+    margin-right: 0.25rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: normal;
+    color: #2f5d2f;
+    background: #e3f0de;
+}
+
+.diet-tag--gluten-free {
+    color: #6b4b12;
+    background: #f5ead2;
+}
+
+.site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.site-footer__hours-text {
+    white-space: pre-line;
+}
+
+.site-nav {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.hero {
+    padding: 3rem 1.5rem;
+    margin: 1rem 0 2rem;
+    text-align: center;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, #f3e3d3, #e9c9a8);
+}
+
+.hero__heading {
+    margin: 0 0 0.75rem;
+    font-size: 2.5rem;
+    color: var(--color-accent);
+}
+
+.hero__lead {
+    max-width: 36rem;
+    margin: 0 auto 1.5rem;
+    font-size: 1.125rem;
+}
+
+.hero__link {
+    display: inline-block;
+    padding: 0.625rem 1.5rem;
+    border-radius: 999px;
+    color: #fff;
+    background: var(--color-accent);
+    text-decoration: none;
+}
+
+.landing .widget-body,
+.landing p {
+    line-height: 1.6;
+}
+
+.search__form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.search__input {
+    flex: 1;
+    padding: 0.625rem 0.875rem;
+    font: inherit;
+    border: 1px solid var(--color-accent);
+    border-radius: 999px;
+    background: #fff;
+}
+
+.search__button {
+    padding: 0.625rem 1.25rem;
+    font: inherit;
+    color: #fff;
+    background: var(--color-accent);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.search__empty {
+    color: #6b5d50;
+}

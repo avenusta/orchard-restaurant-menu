@@ -13,3 +13,4 @@ Restaurant menu site on Orchard Core 3.0.1 (.NET 10), Razor theme, for the Óbud
 ## Conventions
 
 - Inject dependencies with primary constructors (`class Foo(IBar bar)`), not fields plus a separate constructor.
+- Never use em or en dashes in code, content or seed data; use a plain hyphen.

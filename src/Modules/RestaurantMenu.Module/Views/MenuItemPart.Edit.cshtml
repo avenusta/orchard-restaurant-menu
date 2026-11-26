@@ -12,6 +12,23 @@
     <span class="hint">@T["Unavailable items are still listed, marked as sold out."]</span>
 </div>
 
+<fieldset class="mb-3">
+    <legend class="form-label">@T["Dietary"]</legend>
+    <div class="form-check">
+        <input asp-for="IsVegetarian" class="form-check-input" type="checkbox" />
+        <label asp-for="IsVegetarian" class="form-check-label">@T["Vegetarian"]</label>
+    </div>
+    <div class="form-check">
+        <input asp-for="IsVegan" class="form-check-input" type="checkbox" />
+        <label asp-for="IsVegan" class="form-check-label">@T["Vegan"]</label>
+    </div>
+    <div class="form-check">
+        <input asp-for="IsGlutenFree" class="form-check-input" type="checkbox" />
+        <label asp-for="IsGlutenFree" class="form-check-label">@T["Gluten-free"]</label>
+    </div>
+    <span class="hint">@T["Vegan items are always listed as vegetarian too."]</span>
+</fieldset>
+
 <div class="mb-3">
     <label asp-for="SortOrder" class="form-label">@T["Sort order"]</label>
     <input asp-for="SortOrder" class="form-control" type="number" />

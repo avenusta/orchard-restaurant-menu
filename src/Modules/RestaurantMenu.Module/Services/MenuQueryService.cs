@@ -10,12 +10,26 @@ namespace RestaurantMenu.Module.Services;
 
 public sealed class MenuQueryService(IContentManager contentManager, ISession session) : IMenuQueryService
 {
-    public async Task<IReadOnlyList<MenuSection<ContentItem>>> GetMenuAsync()
+    public async Task<IReadOnlyList<MenuSection<ContentItem>>> GetMenuAsync(MenuFilter filter)
     {
         var categories = await GetCategoriesAsync();
 
-        var items = await session
-            .Query<ContentItem, MenuItemPartIndex>()
+        var query = session.Query<ContentItem, MenuItemPartIndex>();
+
+        if (filter.AvailableOnly)
+        {
+            query = query.Where(index => index.IsAvailable);
+        }
+
+        query = filter.Diet switch
+        {
+            DietaryTags.Vegetarian => query.Where(index => index.IsVegetarian),
+            DietaryTags.Vegan => query.Where(index => index.IsVegan),
+            DietaryTags.GlutenFree => query.Where(index => index.IsGlutenFree),
+            _ => query,
+        };
+
+        var items = await query
             .With<ContentItemIndex>(index => index.Published)
             .ListAsync();
 

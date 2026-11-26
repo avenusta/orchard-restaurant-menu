@@ -12,9 +12,13 @@ public sealed class MenuItemPartDisplayDriver(IStringLocalizer<MenuItemPartDispl
     : ContentPartDisplayDriver<MenuItemPart>
 {
     public override IDisplayResult Display(MenuItemPart part, BuildPartDisplayContext context) =>
-        Initialize<MenuItemPartViewModel>(GetDisplayShapeType(context), viewModel => Populate(viewModel, part))
-            .Location("Detail", "Content:5")
-            .Location("Summary", "Content:5");
+        Combine(
+            Initialize<MenuItemPartViewModel>(GetDisplayShapeType(context), viewModel => Populate(viewModel, part))
+                .Location("Detail", "Content:5")
+                .Location("Summary", "Content:5"),
+            Initialize<MenuItemPartViewModel>("DietaryTags", viewModel => Populate(viewModel, part))
+                .Location("Detail", "Meta:2")
+                .Location("Summary", "Meta:2"));
 
     public override IDisplayResult Edit(MenuItemPart part, BuildPartEditorContext context) =>
         Initialize<MenuItemPartViewModel>(GetEditorShapeType(context), viewModel => Populate(viewModel, part));
@@ -35,6 +39,7 @@ public sealed class MenuItemPartDisplayDriver(IStringLocalizer<MenuItemPartDispl
         part.Price = viewModel.Price;
         part.IsAvailable = viewModel.IsAvailable;
         part.SortOrder = viewModel.SortOrder;
+        part.DietaryTags = ToDietaryTags(viewModel);
 
         return Edit(part, context);
     }
@@ -44,6 +49,14 @@ public sealed class MenuItemPartDisplayDriver(IStringLocalizer<MenuItemPartDispl
         viewModel.Price = part.Price;
         viewModel.IsAvailable = part.IsAvailable;
         viewModel.SortOrder = part.SortOrder;
+        viewModel.IsVegetarian = part.DietaryTags.HasFlag(DietaryTags.Vegetarian);
+        viewModel.IsVegan = part.DietaryTags.HasFlag(DietaryTags.Vegan);
+        viewModel.IsGlutenFree = part.DietaryTags.HasFlag(DietaryTags.GlutenFree);
         viewModel.MenuItemPart = part;
     }
+
+    private static DietaryTags ToDietaryTags(MenuItemPartViewModel viewModel) =>
+        (viewModel.IsVegetarian ? DietaryTags.Vegetarian : DietaryTags.None)
+        | (viewModel.IsVegan ? DietaryTags.Vegan : DietaryTags.None)
+        | (viewModel.IsGlutenFree ? DietaryTags.GlutenFree : DietaryTags.None);
 }

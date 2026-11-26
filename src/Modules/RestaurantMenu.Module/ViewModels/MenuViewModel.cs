@@ -1,9 +1,12 @@
 using OrchardCore.DisplayManagement;
+using RestaurantMenu.Module.Services;
 
 namespace RestaurantMenu.Module.ViewModels;
 
 public sealed class MenuViewModel
 {
+    public required MenuFilter Filter { get; init; }
+
     public required IReadOnlyList<MenuSectionViewModel> Sections { get; init; }
 }
 

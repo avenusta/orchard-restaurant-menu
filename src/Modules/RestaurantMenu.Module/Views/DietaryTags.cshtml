@@ -1,0 +1,19 @@
+@model MenuItemPartViewModel
+
+@if (Model.IsVegan || Model.IsVegetarian || Model.IsGlutenFree)
+{
+    <span class="diet-tags">
+        @if (Model.IsVegan)
+        {
+            <span class="diet-tag diet-tag--vegan">@T["Vegan"]</span>
+        }
+        else if (Model.IsVegetarian)
+        {
+            <span class="diet-tag diet-tag--vegetarian">@T["Vegetarian"]</span>
+        }
+        @if (Model.IsGlutenFree)
+        {
+            <span class="diet-tag diet-tag--gluten-free">@T["Gluten-free"]</span>
+        }
+    </span>
+}

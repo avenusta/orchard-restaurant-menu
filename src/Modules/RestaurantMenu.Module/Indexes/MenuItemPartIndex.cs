@@ -15,6 +15,12 @@ public sealed class MenuItemPartIndex : MapIndex
     public bool IsAvailable { get; set; }
 
     public int SortOrder { get; set; }
+
+    public bool IsVegetarian { get; set; }
+
+    public bool IsVegan { get; set; }
+
+    public bool IsGlutenFree { get; set; }
 }
 
 public sealed class MenuItemPartIndexProvider : IndexProvider<ContentItem>
@@ -33,6 +39,9 @@ public sealed class MenuItemPartIndexProvider : IndexProvider<ContentItem>
                     Price = part.Price,
                     IsAvailable = part.IsAvailable,
                     SortOrder = part.SortOrder,
+                    IsVegetarian = part.DietaryTags.HasFlag(DietaryTags.Vegetarian),
+                    IsVegan = part.DietaryTags.HasFlag(DietaryTags.Vegan),
+                    IsGlutenFree = part.DietaryTags.HasFlag(DietaryTags.GlutenFree),
                 };
             });
 }

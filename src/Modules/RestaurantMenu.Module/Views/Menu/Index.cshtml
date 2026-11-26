@@ -6,9 +6,11 @@
 
 <h1 class="menu__title">@T["Menu"]</h1>
 
+@await DisplayAsync(await New.MenuFilterBar(Filter: Model.Filter))
+
 @if (Model.Sections.Count == 0)
 {
-    <p>@T["The menu is empty."]</p>
+    <p>@T["No items match this filter."]</p>
 }
 else
 {

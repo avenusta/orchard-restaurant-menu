@@ -1,3 +1,10 @@
+@using RestaurantMenu.Module.Services
+@inject IRestaurantContext RestaurantContext
+
+@{
+    var restaurant = await RestaurantContext.GetCurrentAsync();
+}
+
 <!DOCTYPE html>
 <html lang="@Orchard.CultureName()" dir="@Orchard.CultureDir()">
 <head>
@@ -15,6 +22,7 @@
         <a class="site-header__name" href="~/">@Site.SiteName</a>
         <nav class="site-nav">
             <a href="~/menu">@T["Menu"]</a>
+            <a href="~/search">@T["Search"]</a>
         </nav>
         @await RenderSectionAsync("Header", required: false)
     </header>
@@ -25,6 +33,20 @@
     </main>
 
     <footer class="site-footer">
+        <div class="site-footer__restaurant">
+            <strong>@restaurant.Name</strong>
+            @if (!string.IsNullOrWhiteSpace(restaurant.Address))
+            {
+                <div>@restaurant.Address</div>
+            }
+        </div>
+        @if (!string.IsNullOrWhiteSpace(restaurant.OpeningHours))
+        {
+            <div class="site-footer__hours">
+                <strong>@T["Opening hours"]</strong>
+                <div class="site-footer__hours-text">@restaurant.OpeningHours</div>
+            </div>
+        }
         @await RenderSectionAsync("Footer", required: false)
     </footer>
 
